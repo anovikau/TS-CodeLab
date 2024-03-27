@@ -1,6 +1,6 @@
 import { LinkedList } from './LinkedList';
 
-describe('LinkedList', (): void => {
+describe('LinkedList', () => {
 	let list: LinkedList<number>;
 
 	beforeEach(() => {

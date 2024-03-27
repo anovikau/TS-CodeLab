@@ -5,7 +5,7 @@ const MESSAGE = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 const PHONE_NUMBER = '+48111222333';
 const CONTENT = 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
 
-describe('EmailService', (): void => {
+describe('EmailService', () => {
 	test('should return a valid string after calling "send" method', () => {
 		const emailService = new EmailService();
 
@@ -15,7 +15,7 @@ describe('EmailService', (): void => {
 	});
 });
 
-describe('SmsService', (): void => {
+describe('SmsService', () => {
 	test('should return a valid string after calling "send" method', () => {
 		const smsService = new SmsService();
 
@@ -25,7 +25,7 @@ describe('SmsService', (): void => {
 	});
 });
 
-describe('SmsAdapter', (): void => {
+describe('SmsAdapter', () => {
 	let smsService: SmsService;
 	let smsAdapter: SmsAdapter;
 

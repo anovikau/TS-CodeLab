@@ -1,6 +1,6 @@
 import { Singleton } from './Singleton';
 
-describe('Singleton', (): void => {
+describe('Singleton', () => {
 	let instance: Singleton;
 
 	beforeEach(() => {
