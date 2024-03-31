@@ -11,6 +11,10 @@ describe('Custom Proxy', () => {
 		console.log = jest.fn();
 	});
 
+	afterEach(() => {
+		jest.clearAllMocks();
+	});
+
 	test('should call realSubject.request() and log the access when access is granted', () => {
 		proxy['checkAccess'] = jest.fn().mockReturnValue(true);
 		proxy['logAccess'] = jest.fn();
