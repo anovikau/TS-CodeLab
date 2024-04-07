@@ -73,6 +73,28 @@ export class LinkedList<T> {
 		}
 	}
 
+	removeNthFromEnd(n: number): ListNode<T> | null {
+		const dummy = new ListNode(null);
+
+		dummy.next = this.head;
+
+		let fast = dummy;
+		let slow = dummy;
+
+		for (let i = 0; i <= n; i++) {
+			fast = fast.next;
+		}
+
+		while (fast != null) {
+			slow = slow.next;
+			fast = fast.next;
+		}
+
+		slow.next = slow.next.next;
+
+		return dummy.next;
+	}
+
 	print(): void {
 		let current = this.head;
 

@@ -40,12 +40,28 @@ describe('LinkedList', () => {
 		expect(firstNode.next?.next?.value).toBe(3);
 	});
 
-	test('delete removes the element with the specified value', () => {
+	test('delete the element with the specified value', () => {
 		list.append(1);
 		list.append(2);
 		list.append(3);
 
 		list.delete(2);
+
+		expect(list.find(2)).toBeNull();
+		expect(list.head?.value).toBe(1);
+		expect(list.head?.next?.value).toBe(3);
+
+		list.delete(1);
+
+		expect(list.head?.value).toBe(3);
+	});
+
+	test('delete the element with the specified order from the end', () => {
+		list.append(1);
+		list.append(2);
+		list.append(3);
+
+		list.removeNthFromEnd(2);
 
 		expect(list.find(2)).toBeNull();
 		expect(list.head?.value).toBe(1);
