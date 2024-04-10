@@ -1,4 +1,4 @@
-class TreeNode {
+export class TreeNode {
 	public value: number;
 	public left: TreeNode | null = null;
 	public right: TreeNode | null = null;
@@ -90,4 +90,18 @@ export class BinaryTree {
 			}
 		}
 	}
+}
+
+export function isValidBST(root: TreeNode | null, min: number = -Infinity, max: number = Infinity): boolean {
+	if (root === null) {
+		return true;
+	}
+
+	const { value } = root;
+
+	if (value <= min || value >= max) {
+		return false;
+	}
+
+	return isValidBST(root.left, min, value) && isValidBST(root.right, value, max);
 }

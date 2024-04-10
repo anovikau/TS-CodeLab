@@ -1,4 +1,4 @@
-import { BinaryTree } from './BinaryTree';
+import { BinaryTree, isValidBST, TreeNode } from './BinaryTree';
 
 describe('BinaryTree', () => {
 	let tree: BinaryTree;
@@ -44,5 +44,39 @@ describe('BinaryTree', () => {
 		tree.delete(5);
 
 		expect(tree.root?.left?.value).toBe(7);
+	});
+});
+
+describe('isValidBST', () => {
+	test('An empty tree is a BST', () => {
+		expect(isValidBST(null)).toBe(true);
+	});
+
+	test('A single node is a BST', () => {
+		const root = new TreeNode(1);
+
+		expect(isValidBST(root)).toBe(true);
+	});
+
+	test('A complete tree that is a BST', () => {
+		const root = new TreeNode(2);
+		root.left = new TreeNode(1);
+		root.right = new TreeNode(3);
+
+		expect(isValidBST(root)).toBe(true);
+	});
+
+	test('Tree is not a BST because of incorrect right child', () => {
+		const root = new TreeNode(1);
+		root.right = new TreeNode(0);
+
+		expect(isValidBST(root)).toBe(false);
+	});
+
+	test('Tree is not a BST because of incorrect left child', () => {
+		const root = new TreeNode(3);
+		root.left = new TreeNode(5);
+
+		expect(isValidBST(root)).toBe(false);
 	});
 });
