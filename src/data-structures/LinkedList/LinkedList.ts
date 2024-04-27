@@ -1,4 +1,4 @@
-class ListNode<T> {
+export class ListNode<T> {
 	public value: T;
 	public next: ListNode<T> | null = null;
 
@@ -104,4 +104,23 @@ export class LinkedList<T> {
 			current = current.next;
 		}
 	}
+}
+
+export function hasCycle<T>(head: ListNode<T> | null): boolean {
+	if (head === null || head.next === null) return false;
+
+	let slow: ListNode<T> | null = head;
+	let fast: ListNode<T> | null = head.next;
+
+	while (slow !== fast) {
+
+		if (fast === null || fast.next === null) {
+				return false;
+		}
+
+		slow = slow!.next;
+		fast = fast.next.next;
+	}
+
+	return true;
 }

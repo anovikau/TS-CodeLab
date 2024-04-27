@@ -1,4 +1,4 @@
-import { LinkedList } from './LinkedList';
+import { LinkedList, hasCycle, ListNode } from './LinkedList';
 
 describe('LinkedList', () => {
 	let list: LinkedList<number>;
@@ -70,5 +70,52 @@ describe('LinkedList', () => {
 		list.delete(1);
 
 		expect(list.head?.value).toBe(3);
+	});
+});
+
+describe('hasCycle', () => {
+	test('should detect a cycle in the linked list', () => {
+		const node1 = new ListNode(3);
+		const node2 = new ListNode(2);
+		const node3 = new ListNode(0);
+		const node4 = new ListNode(-4);
+
+		node1.next = node2;
+		node2.next = node3;
+		node3.next = node4;
+		node4.next = node2; // make a circle
+
+		expect(hasCycle(node1)).toBe(true);
+	});
+
+	test('should detect a cycle at the first node', () => {
+		const node1 = new ListNode(1);
+		const node2 = new ListNode(2);
+
+		node1.next = node2;
+		node2.next = node1;	// make a circle
+
+		expect(hasCycle(node1)).toBe(true);
+	});
+
+	test('should return false for an empty list', () => {
+		expect(hasCycle(null)).toBe(false);
+	});
+
+	test('should return false for a single node without a cycle', () => {
+		const node1 = new ListNode(1);
+
+		expect(hasCycle(node1)).toBe(false);
+	});
+
+	test('should return false for multiple nodes without a cycle', () => {
+		const node1 = new ListNode(1);
+		const node2 = new ListNode(2);
+		const node3 = new ListNode(3);
+
+		node1.next = node2;
+		node2.next = node3;
+
+		expect(hasCycle(node1)).toBe(false);
 	});
 });
