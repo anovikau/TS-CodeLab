@@ -124,3 +124,52 @@ export function hasCycle<T>(head: ListNode<T> | null): boolean {
 
 	return true;
 }
+
+export function reverseList<T>(head: ListNode<T> | null): ListNode<T> | null {
+	let prev: ListNode<T> | null = null;
+	let current = head;
+
+	while(current !== null) {
+		const next = current.next;
+
+		current.next = prev;
+		prev = current;
+		current = next;
+	}
+
+	return prev;
+}
+
+export function isPalindrome<T>(head: ListNode<T> | null): boolean {
+	if (head === null) return true;
+
+	let slow: ListNode<T> | null = head;
+	let fast: ListNode<T> | null = head;
+
+	while (fast !== null && fast.next !== null) {
+		slow = slow!.next;
+		fast = fast.next.next;
+	}
+
+	let prev: ListNode<T> | null = null;
+
+	while (slow !== null) {
+		const next = slow.next;
+
+		slow.next = prev;
+		prev = slow;
+		slow = next;
+	}
+
+	let left: ListNode<T> | null = head;
+	let right: ListNode<T> | null = prev;
+
+	while (right !== null) {
+		if (left!.value !== right.value) return false;
+
+		left = left!.next;
+		right = right.next;
+	}
+
+	return true;
+}

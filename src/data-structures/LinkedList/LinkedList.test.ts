@@ -1,4 +1,4 @@
-import { LinkedList, hasCycle, ListNode } from './LinkedList';
+import { LinkedList, hasCycle, ListNode, reverseList, isPalindrome } from './LinkedList';
 
 describe('LinkedList', () => {
 	let list: LinkedList<number>;
@@ -117,5 +117,110 @@ describe('hasCycle', () => {
 		node2.next = node3;
 
 		expect(hasCycle(node1)).toBe(false);
+	});
+});
+
+describe('reverseList', () => {
+	test('should reverse a list of multiple elements', () => {
+		const node1 = new ListNode(1);
+		const node2 = new ListNode(2);
+		const node3 = new ListNode(3);
+
+		node1.next = node2;
+		node2.next = node3;
+
+		const reversed = reverseList(node1);
+
+		expect(reversed!.value).toBe(3);
+		expect(reversed!.next!.value).toBe(2);
+		expect(reversed!.next!.next!.value).toBe(1);
+		expect(reversed!.next!.next!.next).toBeNull();
+	});
+
+	test('should reverse a single node list', () => {
+		const node = new ListNode(1);
+		const reversed = reverseList(node);
+
+		expect(reversed!.value).toBe(1);
+		expect(reversed!.next).toBeNull();
+	});
+
+	test('should handle null input as an empty list', () => {
+		const reversed = reverseList(null);
+		expect(reversed).toBeNull();
+	});
+
+	test('should reverse a list of two elements', () => {
+		const node1 = new ListNode(1);
+		const node2 = new ListNode(2);
+
+		node1.next = node2;
+
+		const reversed = reverseList(node1);
+
+		expect(reversed!.value).toBe(2);
+		expect(reversed!.next!.value).toBe(1);
+		expect(reversed!.next!.next).toBeNull();
+	});
+});
+
+describe('isPalindrome', () => {
+	test('should return true for an empty list', () => {
+		expect(isPalindrome(null)).toBe(true);
+	});
+
+	test('should return true for a single element list', () => {
+		const node = new ListNode(1);
+		expect(isPalindrome(node)).toBe(true);
+	});
+
+	test('should return true for a palindrome list with even number of elements', () => {
+		const node1 = new ListNode(1);
+		const node2 = new ListNode(2);
+		const node3 = new ListNode(2);
+		const node4 = new ListNode(1);
+
+		node1.next = node2;
+		node2.next = node3;
+		node3.next = node4;
+
+		expect(isPalindrome(node1)).toBe(true);
+	});
+
+	test('should return true for a palindrome list with odd number of elements', () => {
+		const node1 = new ListNode(1);
+		const node2 = new ListNode(2);
+		const node3 = new ListNode(3);
+		const node4 = new ListNode(2);
+		const node5 = new ListNode(1);
+
+		node1.next = node2;
+		node2.next = node3;
+		node3.next = node4;
+		node4.next = node5;
+
+		expect(isPalindrome(node1)).toBe(true);
+	});
+
+	test('should return false for a non-palindrome list', () => {
+		const node1 = new ListNode(1);
+		const node2 = new ListNode(2);
+
+		node1.next = node2;
+
+		expect(isPalindrome(node1)).toBe(false);
+	});
+
+	test('should return false for a longer non-palindrome list', () => {
+		const node1 = new ListNode(1);
+		const node2 = new ListNode(2);
+		const node3 = new ListNode(3);
+		const node4 = new ListNode(4);
+
+		node1.next = node2;
+		node2.next = node3;
+		node3.next = node4;
+
+		expect(isPalindrome(node1)).toBe(false);
 	});
 });
